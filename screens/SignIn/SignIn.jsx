@@ -9,7 +9,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons"; // Importez l'icône FontAwesome
+import { FontAwesome } from "@expo/vector-icons";
 import logo from "../../assets/logo.png";
 import { s } from "../authScreens.styles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,7 +27,7 @@ export default function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // État pour gérer l'affichage du mot de passe
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async () => {
     setError("");
