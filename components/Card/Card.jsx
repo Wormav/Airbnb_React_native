@@ -1,10 +1,17 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { s } from "./card.styles";
 import StarRating from "../StarRating/StarRating";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Card({ data }) {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate("Room", { data: data });
+  };
+
   return (
-    <View style={s.container}>
+    <TouchableOpacity onPress={handlePress} style={s.container}>
       <Image style={s.image} source={{ uri: data.photos[0].url }} />
       <View style={s.infos}>
         <View style={s.titleContainer}>
@@ -24,6 +31,6 @@ export default function Card({ data }) {
         />
       </View>
       <Text style={s.price}>{data.price}€</Text>
-    </View>
+    </TouchableOpacity>
   );
 }

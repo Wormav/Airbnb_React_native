@@ -3,15 +3,72 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/Home/Home";
 import AroundMe from "./screens/AroundMe/AroundMe";
-
+import Profil from "./screens/Profil/Profil";
+import Room from "./screens/Room/Room";
 import { NavigationContainer } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import logo from "./assets/logo.png";
-import Profil from "./screens/Profil/Profil";
 
 export default function Router() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
+
+  function HomeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="HomeScreen"
+          component={Home}
+          options={{
+            headerTitle: () => (
+              <Image source={logo} style={{ width: 80, height: 40 }} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Room"
+          component={Room}
+          options={{
+            headerTitle: () => (
+              <Image source={logo} style={{ width: 80, height: 40 }} />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function AroundMeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="AroundMeScreen"
+          component={AroundMe}
+          options={{
+            headerTitle: () => (
+              <Image source={logo} style={{ width: 80, height: 40 }} />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function ProfileStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="ProfileScreen"
+          component={Profil}
+          options={{
+            headerTitle: () => (
+              <Image source={logo} style={{ width: 80, height: 40 }} />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
 
   return (
     <NavigationContainer>
@@ -43,30 +100,18 @@ export default function Router() {
       >
         <Tab.Screen
           name="Home"
-          component={Home}
-          options={{
-            headerTitle: () => (
-              <Image source={logo} style={{ width: 80, height: 40 }} />
-            ),
-          }}
+          component={HomeStack}
+          options={{ headerShown: false }}
         />
         <Tab.Screen
           name="AroundMe"
-          component={AroundMe}
-          options={{
-            headerTitle: () => (
-              <Image source={logo} style={{ width: 80, height: 40 }} />
-            ),
-          }}
+          component={AroundMeStack}
+          options={{ headerShown: false }}
         />
         <Tab.Screen
           name="Profile"
-          component={Profil}
-          options={{
-            headerTitle: () => (
-              <Image source={logo} style={{ width: 80, height: 40 }} />
-            ),
-          }}
+          component={ProfileStack}
+          options={{ headerShown: false }}
         />
       </Tab.Navigator>
     </NavigationContainer>
