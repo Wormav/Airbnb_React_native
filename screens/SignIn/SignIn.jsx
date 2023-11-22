@@ -16,7 +16,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 
-export default function SignIn({ navigation }) {
+export default function SignIn({ navigation, setUser }) {
   const { height, width } = useWindowDimensions();
   const {
     control,
@@ -40,8 +40,8 @@ export default function SignIn({ navigation }) {
           password: password,
         }
       );
+      setUser(response.data);
       setIsSubmit(false);
-      alert("Oui ça marche mec");
     } catch (err) {
       setError("Erreur de connexion. Veuillez vérifier vos informations.");
       setIsSubmit(false);

@@ -16,7 +16,7 @@ import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function SignUp({ navigation }) {
+export default function SignUp({ navigation, setUser }) {
   const { height, width } = useWindowDimensions();
   const {
     control,
@@ -49,8 +49,8 @@ export default function SignUp({ navigation }) {
           password: password,
         }
       );
+      setUser(response.data);
       setIsSubmit(false);
-      alert("Oui ça marche mec");
     } catch (err) {
       if (err.message === "Request failed with status code 400") {
         setError("Cet email est déjà utilisé");

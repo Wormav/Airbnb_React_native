@@ -1,21 +1,7 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "prettier" // Ajoute la config de Prettier pour désactiver les règles ESLint en conflit
-  ],
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "plugins": [
-    "prettier" // Active le plugin Prettier
-  ],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error", // Active les erreurs pour les problèmes détectés par Prettier
-    "indent": "off"
+    "prettier/prettier": "error"
   }
 }
