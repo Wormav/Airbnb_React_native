@@ -1,36 +1,74 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import s from "./room.styles";
 import Icon from "react-native-vector-icons/Feather";
 import Swiper from "react-native-swiper";
 import MapView, { Marker } from "react-native-maps";
+import axios from "axios";
 
 export default function Room() {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [showMore, setShowMore] = useState(false);
 
   const route = useRoute();
-  const { data } = route.params;
+  const { id } = route.params;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms/${id}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={s.loadingContainer}>
+        <ActivityIndicator size="large" color="#F9575C" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView vertical={true}>
       <View style={s.container}>
         <View style={s.pictureContainer}>
-          <Swiper
-            height={240}
-            showsButtons={false}
-            loop={false}
-            autoplay={false}
-            dot={<View style={s.dot} />}
-            activeDot={<View style={s.activeDot} />}
-          >
-            {data.photos.map((photo, index) => (
-              <View key={index} style={s.slide}>
-                <Image style={s.picture} source={{ uri: photo.url }} />
-              </View>
-            ))}
-          </Swiper>
-          <Text style={s.price}>{data.price}€</Text>
+          {data && data.photos ? (
+            <Swiper
+              height={240}
+              showsButtons={false}
+              loop={false}
+              autoplay={false}
+              dot={<View style={s.dot} />}
+              activeDot={<View style={s.activeDot} />}
+            >
+              {data.photos.map((photo, index) => (
+                <View key={index} style={s.slide}>
+                  <Image style={s.picture} source={{ uri: photo.url }} />
+                </View>
+              ))}
+            </Swiper>
+          ) : (
+            <Text>Loading photos...</Text>
+          )}
+          {data && <Text style={s.price}>{data.price}€</Text>}
         </View>
         <View style={s.infos}>
           <View style={s.titleContainer}>

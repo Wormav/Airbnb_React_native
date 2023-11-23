@@ -32,6 +32,7 @@ export default function Router() {
             headerTitle: () => (
               <Image source={logo} style={{ width: 80, height: 40 }} />
             ),
+            headerBackTitle: "",
           }}
         />
       </Stack.Navigator>
@@ -48,6 +49,16 @@ export default function Router() {
             headerTitle: () => (
               <Image source={logo} style={{ width: 80, height: 40 }} />
             ),
+          }}
+        />
+        <Stack.Screen
+          name="RoomAround"
+          component={Room}
+          options={{
+            headerTitle: () => (
+              <Image source={logo} style={{ width: 80, height: 40 }} />
+            ),
+            headerBackTitle: "",
           }}
         />
       </Stack.Navigator>

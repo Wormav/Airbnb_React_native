@@ -7,7 +7,7 @@ export default function Card({ data }) {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate("Room", { data: data });
+    navigation.navigate("Room", { id: data._id });
   };
 
   return (
